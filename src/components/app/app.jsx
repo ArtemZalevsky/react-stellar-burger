@@ -8,7 +8,7 @@ function App() {
       	margin: "auto",
       	fontSize: "1.5rem"
       }}>
-      	Измените src/components/app/app.jsx и сохраните для обновления.
+      	1234567
       </pre>
     </div>
   );
