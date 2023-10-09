@@ -8,13 +8,13 @@ import {
 import { useMemo } from "react";
 import { ingredientPropType } from "../../utils/prop-types";
 import PropTypes from "prop-types";
+import { data as ingredients } from "../../utils/data";
 
 function BurgerConstructor({ ingredients }) {
   const rolls = useMemo(
     () => ingredients.filter((item) => item.type === "bun"),
     [ingredients]
   );
-
   const others = useMemo(
     () => ingredients.filter((item) => item.type !== "bun"),
     [ingredients]
@@ -24,7 +24,10 @@ function BurgerConstructor({ ingredients }) {
     <div className={`${styles.burgerContainer} pt-25 pl-4 ml-10`}>
       <section className="pl-8">
         {rolls.map((ingredient) => (
-          <div className={`${styles.burgerComponents} ml-6 pr-2`}>
+          <div
+            className={`${styles.burgerComponents} ml-6 pr-2`}
+            key={ingredient._id}
+          >
             <ConstructorElement
               extraClass="mt-4 mb-4"
               key={ingredient._id}
@@ -40,7 +43,7 @@ function BurgerConstructor({ ingredients }) {
       <section className={`custom-scroll ${styles.componentsContainer}`}>
         <ul className={styles.componentsList}>
           {others.map((ingredient) => (
-            <li className={`${styles.componentsItem}`}>
+            <li className={`${styles.componentsItem}`} key={ingredient._id}>
               <DragIcon type="primary" />
               <ConstructorElement
                 extraClass="mb-4"
@@ -56,7 +59,10 @@ function BurgerConstructor({ ingredients }) {
       </section>
       <section className="pl-8">
         {rolls.map((ingredient) => (
-          <div className={`${styles.burgerComponents} ml-6 pr-2`}>
+          <div
+            className={`${styles.burgerComponents} ml-6 pr-2`}
+            key={ingredient._id}
+          >
             <ConstructorElement
               key={ingredient._id}
               type="bottom"
