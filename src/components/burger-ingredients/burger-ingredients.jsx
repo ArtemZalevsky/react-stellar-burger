@@ -1,9 +1,12 @@
 import styles from "./burger-ingredients.module.css";
 import { Tabs } from "../tabs/tabs";
+import React from "react";
 import IngredientItem from "../ingredient-item/ingredient-item";
-import { useMemo } from "react";
+import { useMemo, useEffect } from "react";
 import { ingredientPropType } from "../../utils/prop-types";
 import PropTypes from "prop-types";
+import Modal from "../modal/modal";
+import IngredientDetails from "../ingredient-details/ingredient-details";
 
 function BurgerIngredients({ ingredients }) {
   const rolls = useMemo(
@@ -21,6 +24,27 @@ function BurgerIngredients({ ingredients }) {
     [ingredients]
   );
 
+  const [currentIngredient, setcurrentIngredient] = React.useState(null);
+
+  const closeModal = () => {
+    setcurrentIngredient(null);
+  };
+
+  useEffect(() => {
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        closeModal();
+      }
+    });
+    return () => {
+      document.removeEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          closeModal();
+        }
+      });
+    };
+  }, []);
+
   return (
     <section className={styles.container}>
       <h1 className="text text_type_main-large pt-10 pb-5">Соберите бургер</h1>
@@ -28,23 +52,50 @@ function BurgerIngredients({ ingredients }) {
       <div className={`custom-scroll pt-10 ${styles.ingredientsContainer}`}>
         <h2 className="text text_type_main-medium">Булки</h2>
         <ul className={`${styles.ingredientsList} pl-4 pt-6 pb-10 pr-2`}>
-          {rolls.map((item, index) => (
-            <IngredientItem count={1} item={item} key={item._id + index} />
+          {rolls.map((item) => (
+            <IngredientItem
+              count={1}
+              item={item}
+              key={item._id}
+              onClick={setcurrentIngredient}
+            />
           ))}
         </ul>
         <h2 className="text text_type_main-medium">Соусы</h2>
         <ul className={`${styles.ingredientsList} pl-4 pt-6 pb-8 pr-2`}>
-          {sauces.map((item, index) => (
-            <IngredientItem count={1} item={item} key={item._id + index} />
+          {sauces.map((item) => (
+            <IngredientItem
+              count={1}
+              item={item}
+              key={item._id}
+              onClick={setcurrentIngredient}
+            />
           ))}
         </ul>
         <h2 className="text text_type_main-medium">Начинки</h2>
         <ul className={`${styles.ingredientsList} pl-4`}>
-          {others.map((item, index) => (
-            <IngredientItem item={item} key={item._id + index} />
+          {others.map((item) => (
+            <IngredientItem
+              item={item}
+              key={item._id}
+              onClick={setcurrentIngredient}
+            />
           ))}
         </ul>
       </div>
+
+      {currentIngredient && (
+        <Modal onClick={closeModal}>
+          <IngredientDetails
+            name={currentIngredient.name}
+            src={currentIngredient.image}
+            calories={currentIngredient.calories}
+            proteins={currentIngredient.proteins}
+            fat={currentIngredient.fat}
+            carbohydrates={currentIngredient.carbohydrates}
+          />
+        </Modal>
+      )}
     </section>
   );
 }

@@ -6,10 +6,9 @@ import styles from "./ingredient-item.module.css";
 import PropTypes from "prop-types";
 import { ingredientPropType } from "../../utils/prop-types";
 
-// описываю компонент ингридиента и передаю пропсы
-function IngredientItem({ item, count }) {
+function IngredientItem({ item, count, onClick }) {
   return (
-    <li className={styles.itemList}>
+    <li className={styles.itemList} onClick={() => onClick(item)}>
       {count && <Counter count={count} size="default" extraClass={"m-1"} />}
       <img className="pl-4 pr-4" src={`${item.image}`} alt={`${item.name}`} />
       <div className={`p-1 ${styles.priceItem}`}>

@@ -1,4 +1,5 @@
 import styles from "./burger-constructor.module.css";
+import React from "react";
 import {
   ConstructorElement,
   DragIcon,
@@ -8,7 +9,21 @@ import {
 import { useMemo } from "react";
 import { ingredientPropType } from "../../utils/prop-types";
 import PropTypes from "prop-types";
-import { data as ingredients } from "../../utils/data";
+import Modal from "../modal/modal";
+import OrderDetails from "../order-details/order-details";
+
+function TotalOrder(props) {
+  return (
+    <div className="mr-10">
+      <span className="text text_type_digits-medium mr-2">{props.price}</span>
+      <CurrencyIcon type="primary" />
+    </div>
+  );
+}
+
+TotalOrder.propTypes = {
+  price: PropTypes.number,
+};
 
 function BurgerConstructor({ ingredients }) {
   const rolls = useMemo(
@@ -19,6 +34,29 @@ function BurgerConstructor({ ingredients }) {
     () => ingredients.filter((item) => item.type !== "bun"),
     [ingredients]
   );
+
+  const [total, setTotal] = React.useState(false);
+  //временная функция для открытия модалки
+  const OpenModal = (e) => {
+    setTotal(true);
+  };
+  const closeModal = () => {
+    setTotal(false);
+  };
+  React.useEffect(() => {
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        closeModal();
+      }
+    });
+    return () => {
+      document.removeEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          closeModal();
+        }
+      });
+    };
+  }, []);
 
   return (
     <div className={`${styles.burgerContainer} pt-25 pl-4 ml-10`}>
@@ -67,22 +105,29 @@ function BurgerConstructor({ ingredients }) {
               key={ingredient._id}
               type="bottom"
               isLocked={true}
-              text={`${ingredient.name} (верх)`}
+              text={`${ingredient.name} (низ)`}
               price={ingredient.price}
               thumbnail={ingredient["image_mobile"]}
             />
           </div>
         ))}
       </section>
-      <section className={`${styles.infoContainer} pt-10 pr-4`}>
-        <span className="text text_type_main-large pr-2">610</span>
-        <div className={`${styles.iconContainer} pr-10`}>
-          <CurrencyIcon type="primary" />
-        </div>
-        <Button htmlType="button" type="primary" size="large">
+      <div className={`${styles.totalWrapper} mt-10 mb-15`}>
+        <TotalOrder price={610}></TotalOrder>
+        <Button
+          onClick={OpenModal}
+          htmlType="button"
+          type="primary"
+          size="large"
+        >
           Оформить заказ
         </Button>
-      </section>
+      </div>
+      {total && (
+        <Modal onClick={closeModal}>
+          <OrderDetails />
+        </Modal>
+      )}
     </div>
   );
 }
