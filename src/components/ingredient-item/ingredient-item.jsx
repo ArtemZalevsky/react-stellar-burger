@@ -23,6 +23,7 @@ function IngredientItem({ item, count, onClick }) {
 IngredientItem.propTypes = {
   item: ingredientPropType,
   count: PropTypes.number,
+  onClick: PropTypes.func,
 };
 
 export default IngredientItem;

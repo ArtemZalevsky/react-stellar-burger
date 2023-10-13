@@ -30,21 +30,6 @@ function BurgerIngredients({ ingredients }) {
     setcurrentIngredient(null);
   };
 
-  useEffect(() => {
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") {
-        closeModal();
-      }
-    });
-    return () => {
-      document.removeEventListener("keydown", (e) => {
-        if (e.key === "Escape") {
-          closeModal();
-        }
-      });
-    };
-  }, []);
-
   return (
     <section className={styles.container}>
       <h1 className="text text_type_main-large pt-10 pb-5">Соберите бургер</h1>
@@ -86,14 +71,7 @@ function BurgerIngredients({ ingredients }) {
 
       {currentIngredient && (
         <Modal onClick={closeModal}>
-          <IngredientDetails
-            name={currentIngredient.name}
-            src={currentIngredient.image}
-            calories={currentIngredient.calories}
-            proteins={currentIngredient.proteins}
-            fat={currentIngredient.fat}
-            carbohydrates={currentIngredient.carbohydrates}
-          />
+          <IngredientDetails ingredient={currentIngredient} />
         </Modal>
       )}
     </section>

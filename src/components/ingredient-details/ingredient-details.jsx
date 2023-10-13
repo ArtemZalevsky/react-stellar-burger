@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import styles from "../ingredient-details/ingredient-details.module.css";
 
-function IngredientDetails(props) {
+function IngredientDetails({ ingredient }) {
   return (
     <div className={styles.ingredientDetails}>
       <p
@@ -10,29 +10,29 @@ function IngredientDetails(props) {
         Детали ингридиента
       </p>
       <img
-        src={props.src}
-        alt={props.src}
+        src={ingredient.image}
+        alt={ingredient.image}
         className={styles.ingredientDetailsPicture}
       ></img>
-      <p className="text text_type_main-medium mt-4">{props.name}</p>
+      <p className="text text_type_main-medium mt-4">{ingredient.name}</p>
       <div
         className={`${styles.ingredientParameters} text text_type_main-default text_color_inactive`}
       >
         <p className={styles.ingredientParameter}>
           <span>Калории,ккал</span>
-          <span>{props.calories}</span>
+          <span>{ingredient.calories}</span>
         </p>
         <p className={styles.ingredientParameter}>
           <span>Белки,&nbsp;г</span>
-          <span>{props.proteins}</span>
+          <span>{ingredient.proteins}</span>
         </p>
         <p className={styles.ingredientParameter}>
           <span>Жиры,&nbsp;г</span>
-          <span>{props.fat}</span>
+          <span>{ingredient.fat}</span>
         </p>
         <p className={styles.ingredientParameter}>
           <span>Углеводы,&nbsp;г</span>
-          <span>{props.carbohydrates}</span>
+          <span>{ingredient.carbohydrates}</span>
         </p>
       </div>
     </div>

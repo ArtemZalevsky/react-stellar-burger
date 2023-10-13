@@ -6,7 +6,7 @@ import {
   CurrencyIcon,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { ingredientPropType } from "../../utils/prop-types";
 import PropTypes from "prop-types";
 import Modal from "../modal/modal";
@@ -35,28 +35,13 @@ function BurgerConstructor({ ingredients }) {
     [ingredients]
   );
 
-  const [total, setTotal] = React.useState(false);
-  //временная функция для открытия модалки
-  const OpenModal = (e) => {
+  const [total, setTotal] = useState(false);
+  const openModal = (e) => {
     setTotal(true);
   };
-  const closeModal = () => {
+  const closeAllPopups = () => {
     setTotal(false);
   };
-  React.useEffect(() => {
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") {
-        closeModal();
-      }
-    });
-    return () => {
-      document.removeEventListener("keydown", (e) => {
-        if (e.key === "Escape") {
-          closeModal();
-        }
-      });
-    };
-  }, []);
 
   return (
     <div className={`${styles.burgerContainer} pt-25 pl-4 ml-10`}>
@@ -115,7 +100,7 @@ function BurgerConstructor({ ingredients }) {
       <div className={`${styles.totalWrapper} mt-10 mb-15`}>
         <TotalOrder price={610}></TotalOrder>
         <Button
-          onClick={OpenModal}
+          onClick={openModal}
           htmlType="button"
           type="primary"
           size="large"
@@ -124,7 +109,7 @@ function BurgerConstructor({ ingredients }) {
         </Button>
       </div>
       {total && (
-        <Modal onClick={closeModal}>
+        <Modal onClick={closeAllPopups}>
           <OrderDetails />
         </Modal>
       )}

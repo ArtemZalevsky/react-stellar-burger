@@ -29,19 +29,17 @@ function App() {
     initialIngredients();
   }, []);
   return (
-    <>
-      <div className={styles.app}>
-        <AppHeader />
-        <main className="content-container">
-          {!state.isLoading && state.data.length && (
-            <>
-              <BurgerIngredients ingredients={state.data} />
-              <BurgerConstructor ingredients={state.data} />
-            </>
-          )}
-        </main>
-      </div>
-    </>
+    <div className={styles.app}>
+      <AppHeader />
+      <main className="content-container">
+        {!state.isLoading && state.data.length && (
+          <>
+            <BurgerIngredients ingredients={state.data} />
+            <BurgerConstructor ingredients={state.data} />
+          </>
+        )}
+      </main>
+    </div>
   );
 }
 
