@@ -40,12 +40,7 @@ function IngredientDetails({ ingredient }) {
 }
 
 IngredientDetails.propTypes = {
-  src: PropTypes.any,
-  name: PropTypes.string,
-  calories: PropTypes.number,
-  proteins: PropTypes.number,
-  fat: PropTypes.number,
-  carbohydrates: PropTypes.number,
+  ingredient: PropTypes.any,
 };
 
 export default IngredientDetails;
