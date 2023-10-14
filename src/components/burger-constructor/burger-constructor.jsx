@@ -11,6 +11,7 @@ import { ingredientPropType } from "../../utils/prop-types";
 import PropTypes from "prop-types";
 import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
+import useModal from "../../hooks/useModal";
 
 function TotalOrder(props) {
   return (
@@ -35,13 +36,7 @@ function BurgerConstructor({ ingredients }) {
     [ingredients]
   );
 
-  const [total, setTotal] = useState(false);
-  const openModal = (e) => {
-    setTotal(true);
-  };
-  const closeAllPopups = () => {
-    setTotal(false);
-  };
+  const { isModalOpen, openModal, closeModal } = useModal();
 
   return (
     <div className={`${styles.burgerContainer} pt-25 pl-4 ml-10`}>
@@ -108,8 +103,8 @@ function BurgerConstructor({ ingredients }) {
           Оформить заказ
         </Button>
       </div>
-      {total && (
-        <Modal onClick={closeAllPopups}>
+      {isModalOpen && (
+        <Modal onClick={closeModal}>
           <OrderDetails />
         </Modal>
       )}
