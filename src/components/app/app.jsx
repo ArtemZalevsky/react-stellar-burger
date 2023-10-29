@@ -24,7 +24,7 @@ function App() {
         .then((object) => {
           setState({ data: object.data, isLoading: false });
         })
-        .catch((error) => console.log(error));
+        .catch(console.error);
     };
     initialIngredients();
   }, []);
