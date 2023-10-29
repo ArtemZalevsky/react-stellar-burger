@@ -3,6 +3,7 @@
   height: 208px;
   position: relative;
   text-align: center;
+  cursor: pointer;
 }
 
 .priceItem {
