@@ -1,8 +1,8 @@
 import { useContext, useState } from 'react';
 import styles from './food-items.module.css';
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components'
-import Modal from '../../../Modal/modal';
-import IngredientDetails from '../../../IngredientDetails/IngredientDetails';
+import Modal from '../../../modal/modal';
+import IngredientDetails from '../../../ingredient-details/ingredient-details';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { BurgerContext } from '../../../../services/burgerContext';

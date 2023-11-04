@@ -4,13 +4,12 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import ModalOverlay
- from '../ModalOverlay/modalOverlay';
+    from '../modal-overlay/modal-overlay';
 const modalRoot = document.getElementById("root");
 
 export default function Modal(props) {
 
     const { children, details, onClose } = props;
-
 
     const handleEscClose = (evt) => {
         if ((evt.key === 'Escape')) {
@@ -29,10 +28,10 @@ export default function Modal(props) {
 
     return ReactDOM.createPortal((
         <>
-        <div className={classNames(styles['modal-block'], styles[`modal-block_${details}`], 'pt-10 pl-10 pr-10')}>
-            {children}
-        </div>
-        <ModalOverlay onClick={onClose} />
+            <div className={classNames(styles['modal-block'], styles[`modal-block_${details}`], 'pt-10 pl-10 pr-10')}>
+                {children}
+            </div>
+            <ModalOverlay onClick={onClose} />
         </>
     ), modalRoot)
 

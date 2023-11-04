@@ -1,6 +1,6 @@
 import { } from '@ya.praktikum/react-developer-burger-ui-components'
-import Info from './Info/info';
-import FoodItems from './Food-Items/food-items';
+import Info from './info/info';
+import FoodItems from './food-Items/food-items';
 
 function BurgerConstructor() {
     return (

@@ -2,8 +2,8 @@ import { useState, useContext } from 'react';
 import styles from './info.module.css';
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import classNames from 'classnames';
-import Modal from '../../../Modal/modal';
-import OrderDetails from '../../../OrderDetails/OrderDetails';
+import Modal from '../../../modal/modal';
+import OrderDetails from '../../../order-details/order-details';
 import { PriceContext } from '../../../../services/priceContext';
 import { BurgerContext } from '../../../../services/burgerContext';
 import checkResponse from '../../../../utils/checkRes';

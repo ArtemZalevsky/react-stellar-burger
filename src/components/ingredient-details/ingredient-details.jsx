@@ -1,4 +1,4 @@
-import styles from './IngredientDetails.module.css';
+import styles from './ingredient-details.module.css';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import classNames from 'classnames';
 import PropTypes from 'prop-types';

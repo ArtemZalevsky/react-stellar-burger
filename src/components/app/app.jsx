@@ -43,14 +43,12 @@ function App() {
                 ) : error ? (
                     console.log(error.message)
                 ) : (
-                    <>
-                        <PriceContext.Provider value={{ price, setPrice }}>
-                            <BurgerContext.Provider value={{ burgerElements, dispatch }}>
-                                <Ingredients data={data.data} />
-                                <BurgerConstructor />
-                            </BurgerContext.Provider>
-                        </PriceContext.Provider>
-                    </>
+                    <PriceContext.Provider value={{ price, setPrice }}>
+                        <BurgerContext.Provider value={{ burgerElements, dispatch }}>
+                            <Ingredients data={data.data} />
+                            <BurgerConstructor />
+                        </BurgerContext.Provider>
+                    </PriceContext.Provider>
                 )}
             </main>
         </>

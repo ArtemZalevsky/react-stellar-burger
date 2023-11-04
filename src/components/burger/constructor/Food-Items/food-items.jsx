@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import styles from './food-items.module.css';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { BurgerContext } from '../../../../services/burgerContext';
-import RenderItemsOfType from '../../renderItemsOfType/renderItemsOfType';
+import RenderItemsOfType from '../../renderItems-of-type/renderItems-of-type';
 import { PriceContext } from '../../../../services/priceContext';
 
 export default function FoodItems() {

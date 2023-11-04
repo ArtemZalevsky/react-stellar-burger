@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import styles from './modalOverlay.module.css'
+import styles from './modal-overlay.module.css'
 import PropTypes from 'prop-types';
 const modalRoot = document.getElementById("root");
 
