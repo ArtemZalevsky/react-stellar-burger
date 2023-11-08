@@ -26,9 +26,9 @@ const Modal = ({ children, onClose, title }) => {
         <div className={`${modal.item} pt-5`}>
           <div className={modal.title_close_container}>
             <div className={`${modal.title_container}`}>
-            { title && 
-              <h2 className={`${modal.title} text text_type_main-large`}>{title}</h2>}
-            </div>  
+              {title &&
+                <h2 className={`${modal.title} text text_type_main-large`}>{title}</h2>}
+            </div>
             <button onClick={onClose} className={modal.button_close}>
               <CloseIcon />
             </button>
