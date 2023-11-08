@@ -1,11 +1,38 @@
-import PropTypes from "prop-types";
-import styles from "../modal-overlay/modal-overlay.module.css";
+import { useEffect } from 'react';
+import ReactDOM from 'react-dom';
+import styles from './modal-overlay.module.css'
+import PropTypes from 'prop-types';
+const modalRoot = document.getElementById("root");
 
-function ModalOverlay(props) {
-  return <div onClick={props.onClick} className={styles.popup}></div>;
+export default function ModalOverlay(props) {
+
+    const { onClick } = props;
+
+    const handleOverplayClose = (event) => {
+        if (event.target.classList.contains(`${styles.overlay}`)) {
+            onClick();
+        }
+    }
+
+    useEffect(() => {
+        document.addEventListener('click', handleOverplayClose)
+        return () => {
+            document.removeEventListener('click', handleOverplayClose)
+        }
+    })
+
+    return ReactDOM.createPortal(
+        (
+            <div className={styles.overlay}>
+            </div>
+        ), modalRoot
+
+    )
+
 }
-ModalOverlay.propTypes = {
-  onClick: PropTypes.func,
-};
 
-export default ModalOverlay;
+
+ModalOverlay.propTypes = {
+    onClick: PropTypes.func,
+    children: PropTypes.elementType
+}

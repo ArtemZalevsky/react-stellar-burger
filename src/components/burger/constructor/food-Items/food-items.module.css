@@ -1,0 +1,35 @@
+.items-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.item-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ingredients {
+    max-width: 600px;
+    width: 100%;
+}
+
+.main-items {
+    max-height: 400px;
+    height: 100%;
+    overflow: scroll;
+    overflow-x: hidden;
+    justify-content: stretch;
+}
+
+.custom-scroll {
+    padding-left: 8px;
+}

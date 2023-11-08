@@ -1,0 +1,12 @@
+.info {
+    display: flex;
+    justify-content: right;
+    max-width: 568px;
+    width:100%;
+}
+
+.info__price {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
