@@ -1,46 +1,73 @@
-import PropTypes from "prop-types";
-import styles from "../ingredient-details/ingredient-details.module.css";
+import ingredientDetails from "./ingredient-details.module.css";
+import { useSelector } from "react-redux";
 
-function IngredientDetails({ ingredient }) {
+const IngredientDetails = () => {
+  const tabIngredient = useSelector(
+    (state) => state.ingredientDetails.tabIngredient
+  );
+
   return (
-    <div className={styles.ingredientDetails}>
-      <p
-        className={`${styles.modalHeading} text text_type_main-large ml-10 mt-10`}
-      >
-        Детали ингридиента
-      </p>
-      <img
-        src={ingredient.image}
-        alt={ingredient.image}
-        className={styles.ingredientDetailsPicture}
-      ></img>
-      <p className="text text_type_main-medium mt-4">{ingredient.name}</p>
-      <div
-        className={`${styles.ingredientParameters} text text_type_main-default text_color_inactive`}
-      >
-        <p className={styles.ingredientParameter}>
-          <span>Калории,ккал</span>
-          <span>{ingredient.calories}</span>
-        </p>
-        <p className={styles.ingredientParameter}>
-          <span>Белки,&nbsp;г</span>
-          <span>{ingredient.proteins}</span>
-        </p>
-        <p className={styles.ingredientParameter}>
-          <span>Жиры,&nbsp;г</span>
-          <span>{ingredient.fat}</span>
-        </p>
-        <p className={styles.ingredientParameter}>
-          <span>Углеводы,&nbsp;г</span>
-          <span>{ingredient.carbohydrates}</span>
-        </p>
-      </div>
+    <div className={`${ingredientDetails.container} `}>
+      <figure className={`${ingredientDetails.figure} pb-4`}>
+        <img src={tabIngredient.image_large} alt="картинка ингредиента" />
+        <figcaption
+          className={`${ingredientDetails.caption} text text_type_main-medium pt-4`}
+        >
+          {tabIngredient.name}
+        </figcaption>
+      </figure>
+      <ul className={`${ingredientDetails.list} pt-4`}>
+        <li className={`${ingredientDetails.item} mr-5`}>
+          <p
+            className={`${ingredientDetails.color_text} text text_type_main-default`}
+          >
+            Калории,ккал
+          </p>
+          <p
+            className={`${ingredientDetails.color_text} text text_type_digits-default`}
+          >
+            {tabIngredient.calories}
+          </p>
+        </li>
+        <li className={`${ingredientDetails.item} mr-5`}>
+          <p
+            className={`${ingredientDetails.color_text} text text_type_main-default`}
+          >
+            Белки, г
+          </p>
+          <p
+            className={`${ingredientDetails.color_text} text text_type_digits-default`}
+          >
+            {tabIngredient.proteins}
+          </p>
+        </li>
+        <li className={`${ingredientDetails.item} mr-5`}>
+          <p
+            className={`${ingredientDetails.color_text} text text_type_main-default`}
+          >
+            Жиры, г
+          </p>
+          <p
+            className={`${ingredientDetails.color_text} text text_type_digits-default`}
+          >
+            {tabIngredient.fat}
+          </p>
+        </li>
+        <li className={`${ingredientDetails.item} pb-15`}>
+          <p
+            className={`${ingredientDetails.color_text} text text_type_main-default`}
+          >
+            Углеводы, г
+          </p>
+          <p
+            className={`${ingredientDetails.color_text} text text_type_digits-default`}
+          >
+            {tabIngredient.carbohydrates}
+          </p>
+        </li>
+      </ul>
     </div>
   );
-}
-
-IngredientDetails.propTypes = {
-  ingredient: PropTypes.any,
 };
 
 export default IngredientDetails;

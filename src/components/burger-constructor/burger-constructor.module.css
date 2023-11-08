@@ -1,40 +1,37 @@
-.burgerContainer {
-  width: 600px;
-  height: 912px;
+.ingridient {
+  margin: 0 auto;
 }
 
-.burgerComponents:last-child {
-  display: none;
-}
-
-.componentsContainer {
-  height: 482px;
+.ingridient__list {
+  height: 664px;
   overflow-y: scroll;
+  list-style-type: none;
+  padding-left: 0;
+  height: 464px;
 }
 
-.componentsList {
-  margin: 0px;
+.ingridient__list::-webkit-scrollbar {
+  width: 8px;
+  background-color: #2f2f37;
 }
 
-.componentsItem {
+.ingridient__list::-webkit-scrollbar-thumb {
+  background-color: #8585ad;
+}
+
+.ingridient__item {
+  max-width: 536px;
   display: flex;
   align-items: center;
+  justify-items: center;
 }
 
-.infoContainer {
+.ingridient__sum {
+  display: flex;
+}
+
+.order {
+  max-width: 552px;
   display: flex;
   justify-content: flex-end;
-  align-items: center;
-}
-
-.iconContainer svg {
-  height: 36px;
-  width: 36px;
-  object-fit: cover;
-}
-
-.totalWrapper {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
 }

@@ -1,43 +1,24 @@
 import styles from "./app.module.css";
 import AppHeader from "../app-header/app-header";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
-import { useState, useEffect } from "react";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
-
-const url = "https://norma.nomoreparties.space/api/ingredients";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 function App() {
-  const [state, setState] = useState({
-    isLoading: false,
-    data: [],
-  });
-  useEffect(() => {
-    const initialIngredients = () => {
-      setState({ ...state, isLoading: true });
-      fetch(`${url}`)
-        .then((res) => {
-          if (res.ok) {
-            return res.json();
-          }
-          return Promise.reject(`Ошибка ${res.status}`);
-        })
-        .then((object) => {
-          setState({ data: object.data, isLoading: false });
-        })
-        .catch((error) => console.log(error));
-    };
-    initialIngredients();
-  }, []);
   return (
     <div className={styles.app}>
       <AppHeader />
-      <main className="content-container">
-        {!state.isLoading && state.data.length && (
-          <>
-            <BurgerIngredients ingredients={state.data} />
-            <BurgerConstructor ingredients={state.data} />
-          </>
-        )}
+      <main className={styles.main}>
+        <DndProvider backend={HTML5Backend}>
+          <section className={styles.ingredients}>
+            <h1 className="text text_type_main-large">Соберите бургер</h1>
+            <BurgerIngredients />
+          </section>
+          <section className={styles.burger__constructor}>
+            <BurgerConstructor />
+          </section>
+        </DndProvider>
       </main>
     </div>
   );

@@ -1,22 +1,23 @@
-.container {
-    width: 600px;
-    height: 912px;
+.ingridient__list {
+  margin: 0;
+  list-style-type: none;
+  padding-left: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px 24px;
 }
 
-.ingredientsContainer {
-    height: 756px;
-    overflow-y: scroll;
-    justify-content: space-between;
+.ingridient__container {
+  height: 664px;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
 }
 
-.ingredientsList {
-    display: flex;
-    list-style: none;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin: 0;
+.ingridient__container::-webkit-scrollbar {
+  width: 8px;
+  background-color: #2f2f37;
 }
 
-.ingredientsList:last-of-type {
-    margin-left: 24px;
+.ingridient__container::-webkit-scrollbar-thumb {
+  background-color: #8585ad;
 }
