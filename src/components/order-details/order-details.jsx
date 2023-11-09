@@ -9,7 +9,7 @@ function OrderDetails() {
   if (orderFailed) {
     return <p>Произошла ошибка при получении данных</p>;
   } else if (orderRequest) {
-    return <p>Загрузка...</p>;
+    return <p className={`${orderDetails.container} m-4 pb-15 text_type_main-large`}>Загрузка...</p>;
   } else {
     return (
       <ul className={`${orderDetails.container} m-4 pb-15`}>

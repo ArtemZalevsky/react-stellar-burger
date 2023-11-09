@@ -20,13 +20,14 @@ import {
   clearConstructorBun,
 } from "../../services/actions/actions";
 import { useDrop } from "react-dnd";
-import { v4 as uuidv4 } from "uuid";
+
 
 function BurgerConstructor() {
   const dispatch = useDispatch();
-  const { bun, ingredients } = useSelector(
+  const { bun, ingredients, uniqueId } = useSelector(
     (state) => state.ingredientsConstructor
   );
+
   const { isOpenOrder } = useSelector((state) => state.orderDetails);
   const saucesAndMains = useMemo(
     () => ingredients.filter((m) => m.type !== "bun"),
@@ -42,7 +43,7 @@ function BurgerConstructor() {
     if (item.type === "bun") {
       return dispatch(addIngredientsBun(item));
     } else if (item.type !== "bun") {
-      return dispatch(addIngredients(item, uuidv4()));
+      return dispatch(addIngredients(item));
     }
   }
 
@@ -103,8 +104,8 @@ function BurgerConstructor() {
           />
         )}
         <ul className={`${burgerStyles.ingridient__list} pt-5`}>
-          {ingredients.map((item, key) => (
-            <li key={key} className={`${burgerStyles.ingridient__item} pb-4`}>
+          {ingredients.map((item) => (
+            <li key={uniqueId} className={`${burgerStyles.ingridient__item} pb-4`}>
               <BurgerIngredient
                 ingridient={item}
                 moveItemIngredient={moveItemIngredient}
