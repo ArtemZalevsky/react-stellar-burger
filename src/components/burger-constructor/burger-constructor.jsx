@@ -24,10 +24,10 @@ import { useDrop } from "react-dnd";
 
 function BurgerConstructor() {
   const dispatch = useDispatch();
-  const { bun, ingredients, uniqueId } = useSelector(
+  const { bun, ingredients } = useSelector(
     (state) => state.ingredientsConstructor
   );
-
+  console.log();
   const { isOpenOrder } = useSelector((state) => state.orderDetails);
   const saucesAndMains = useMemo(
     () => ingredients.filter((m) => m.type !== "bun"),
@@ -105,7 +105,7 @@ function BurgerConstructor() {
         )}
         <ul className={`${burgerStyles.ingridient__list} pt-5`}>
           {ingredients.map((item) => (
-            <li key={uniqueId} className={`${burgerStyles.ingridient__item} pb-4`}>
+            <li key={item.uniqueId} className={`${burgerStyles.ingridient__item} pb-4`}>
               <BurgerIngredient
                 ingridient={item}
                 moveItemIngredient={moveItemIngredient}

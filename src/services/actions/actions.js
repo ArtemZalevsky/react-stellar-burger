@@ -109,11 +109,13 @@ export function addIngredientsBun(item) {
   }
 }
 
-export function addIngredients(item) {
+export const addIngredients = (item) => {
   return {
     type: ADD_INGREDIENTS_CONSTRUCTOR,
-    ingredients: item,
-    uniqueId: uuidv4()
+    ingredients: {
+      ...item, // используем `spread`, чтобы поменять ссылку на объект. Таким образом `redux` обновит его в хранилище
+      uniqueId: uuidv4()  // и добавляем в объект новое поле, которое потом будет использовано в `key`
+    }
   }
 }
 
