@@ -1,48 +1,73 @@
-import styles from './ingredient-details.module.css';
-import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import classNames from 'classnames';
-import PropTypes from 'prop-types';
+import ingredientDetails from "./ingredient-details.module.css";
+import { useSelector } from "react-redux";
 
-export default function IngredientDetails(props) {
+const IngredientDetails = () => {
+  const tabIngredient = useSelector(
+    (state) => state.ingredientDetails.tabIngredient
+  );
 
-    return (
-        (
-            <>
-                <div className={classNames(styles['modal-header'],)}>
-                    <h1 className={classNames('text text_type_main-large')}>Детали ингредиента</h1>
-                    <CloseIcon type="primary" onClick={props.onClose} />
-                </div>
-                <img src={props.description.image} className={classNames(styles['modal-img'], 'mb-4')}></img>
-                <p className={classNames('text text_type_main-medium mb-8')}>{props.description.name}</p>
-                <div className={classNames(styles['modal-nutritions'], 'mb-15')}>
-                    <div className={classNames(styles['modal-nutrition'], 'mr-5')}>
-                        <p className={'mb-3 text text_type_main-default text_color_inactive'}>Калории,ккал</p>
-                        <p className={'text text_type_digits-default text_color_inactive'}>{props.description.calories}</p>
-                    </div>
-                    <div className={classNames(styles['modal-nutrition'], 'mr-5')}>
-                        <p className={'mb-3 text text_type_main-default text_color_inactive'}>Белки, г</p>
-                        <p className={'text text_type_digits-default text_color_inactive'}>{props.description.proteins}</p>
-                    </div>
-                    <div className={classNames(styles['modal-nutrition'], 'mr-5')}>
-                        <p className={'mb-3 text text_type_main-default text_color_inactive'}>Жиры, г</p>
-                        <p className={'text text_type_digits-default text_color_inactive'}>{props.description.fat}</p>
-                    </div>
-                    <div className={classNames(styles['modal-nutrition'])}>
-                        <p className={'mb-3 text text_type_main-default text_color_inactive'}>Углеводы, г</p>
-                        <p className={'text text_type_digits-default text_color_inactive'}>{props.description.carbohydrates}</p>
-                    </div>
-                </div>
-            </>
+  return (
+    <div className={`${ingredientDetails.container} `}>
+      <figure className={`${ingredientDetails.figure} pb-4`}>
+        <img src={tabIngredient.image_large} alt="картинка ингредиента" />
+        <figcaption
+          className={`${ingredientDetails.caption} text text_type_main-medium pt-4`}
+        >
+          {tabIngredient.name}
+        </figcaption>
+      </figure>
+      <ul className={`${ingredientDetails.list} pt-4`}>
+        <li className={`${ingredientDetails.item} mr-5`}>
+          <p
+            className={`${ingredientDetails.color_text} text text_type_main-default`}
+          >
+            Калории,ккал
+          </p>
+          <p
+            className={`${ingredientDetails.color_text} text text_type_digits-default`}
+          >
+            {tabIngredient.calories}
+          </p>
+        </li>
+        <li className={`${ingredientDetails.item} mr-5`}>
+          <p
+            className={`${ingredientDetails.color_text} text text_type_main-default`}
+          >
+            Белки, г
+          </p>
+          <p
+            className={`${ingredientDetails.color_text} text text_type_digits-default`}
+          >
+            {tabIngredient.proteins}
+          </p>
+        </li>
+        <li className={`${ingredientDetails.item} mr-5`}>
+          <p
+            className={`${ingredientDetails.color_text} text text_type_main-default`}
+          >
+            Жиры, г
+          </p>
+          <p
+            className={`${ingredientDetails.color_text} text text_type_digits-default`}
+          >
+            {tabIngredient.fat}
+          </p>
+        </li>
+        <li className={`${ingredientDetails.item} pb-15`}>
+          <p
+            className={`${ingredientDetails.color_text} text text_type_main-default`}
+          >
+            Углеводы, г
+          </p>
+          <p
+            className={`${ingredientDetails.color_text} text text_type_digits-default`}
+          >
+            {tabIngredient.carbohydrates}
+          </p>
+        </li>
+      </ul>
+    </div>
+  );
+};
 
-        )
-
-    )
-
-}
-
-
-IngredientDetails.propTypes = {
-    onClose: PropTypes.func,
-    description: PropTypes.object,
-    children: PropTypes.elementType
-}
+export default IngredientDetails;

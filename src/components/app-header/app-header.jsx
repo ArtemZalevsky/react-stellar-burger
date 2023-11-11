@@ -1,46 +1,42 @@
-import styles from "./app-header.module.css";
 import {
-  BurgerIcon,
-  ListIcon,
   Logo,
+  BurgerIcon,
   ProfileIcon,
+  ListIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+import headerStyles from "./app-header.module.css";
 
 function AppHeader() {
   return (
-    <header className={styles.header}>
-      <nav className="content-container pt-4 pb-4">
-        <section className={styles.content}>
-          <ul className={`${styles.list} pl-5`}>
-            <li className={styles.itemList && "pr-10"}>
-              <a href="#" className={styles.link}>
-                <BurgerIcon type="primary" />
-                <p className="text text_type_main-default pl-2">Конструктор</p>
-              </a>
-            </li>
-            <li className={styles.itemList && "pr-10"}>
-              <a href="#" className={styles.link}>
-                <ListIcon type="secondary" />
-                <p className="text text_type_main-default text_color_inactive pl-2">
-                  Лента заказов
-                </p>
-              </a>
-            </li>
-          </ul>
-          <div className={styles.logo}>
-            <Logo />
-          </div>
-          <ul className={`${styles.list} pr-6`}>
-            <li className={styles.itemList}>
-              <a href="#" className={styles.link}>
-                <ProfileIcon type="secondary" />
-                <p className="text text_type_main-default text_color_inactive pl-2">
-                  Личный кабинет
-                </p>
-              </a>
-            </li>
-          </ul>
-        </section>
+    <header className={headerStyles.header}>
+      <div className={headerStyles.logo}>
+        <Logo />
+      </div>
+      <nav className="pb-4 pt-4">
+        <ul className={`${headerStyles.header_list}`}>
+          <li className={`${headerStyles.header_item} pl-5 pr-5`}>
+            <a href="#burger-constructor" className={headerStyles.header_link}>
+              <BurgerIcon type="primary" />
+              <p className="text text_type_main-default  pl-2">Конструктор</p>
+            </a>
+          </li>
+          <li className={`${headerStyles.header_item} pl-5`}>
+            <a href="#order-feed" className={headerStyles.header_link}>
+              <ListIcon type="secondary" />
+              <p className="text text_type_main-default text_color_inactive pl-2">
+                Лента заказов
+              </p>
+            </a>
+          </li>
+          <li className={`${headerStyles.header_item} pl-5`}>
+            <a href="#private-office" className={headerStyles.header_link}>
+              <ProfileIcon type="secondary" />
+              <p className="text text_type_main-default text_color_inactive pl-2 pr-5">
+                Личный кабинет
+              </p>
+            </a>
+          </li>
+        </ul>
       </nav>
     </header>
   );

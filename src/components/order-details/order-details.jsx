@@ -1,34 +1,43 @@
-import styles from './order-details.module.css';
-import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import classNames from 'classnames';
-import PropTypes from 'prop-types';
+import orderDetails from "./order-details.module.css";
+import { CheckMarkIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import { useSelector } from "react-redux";
 
-export default function OrderDetails(props) {
-
+function OrderDetails() {
+  const { orderRequest, orderFailed, currOrder } = useSelector(
+    (state) => state.orderDetails
+  );
+  if (orderFailed) {
+    return <p>Произошла ошибка при получении данных</p>;
+  } else if (orderRequest) {
+    return <p className={`${orderDetails.container} m-4 pb-15 text_type_main-large`}>Загрузка...</p>;
+  } else {
     return (
-        (
-            <>
-                <div className={styles['modal-close_btn']}>
-                    <CloseIcon type="primary" onClick={props.onClose} />
-                </div>
-                <h1 className={classNames(styles['model-number'], 'text text_type_digits-large mb-8')}>
-                    {
-                        props.number
-                    }
-                </h1>
-                <p className={'text text_type_main-medium mb-15'}>Идентификатор заказа</p>
-                <div className={classNames(styles['modal-gif'], 'mb-15')}></div>
-                <p className={'text text_type_main-default mb-2'}>Ваш заказ начали готовить</p>
-                <p className={'text text_type_main-default text_color_inactive'}>Дождитесь готовности на орбитальной станции</p>
-            </>
-        )
-
-    )
-
+      <ul className={`${orderDetails.container} m-4 pb-15`}>
+        <li className={`${orderDetails.item} pb-15`}>
+          <p
+            className={`${orderDetails.number} text text_type_digits-large pb-4`}
+          >
+            {currOrder.order.number}
+          </p>
+          <p className="text text_type_main-medium pt-4">
+            идентификатор заказа
+          </p>
+        </li>
+        <li className={`${orderDetails.item} pt-15 pb-15`}>
+          <CheckMarkIcon type="primary" />
+          <div className={`${orderDetails.done}`}></div>
+        </li>
+        <li className={`${orderDetails.item} pb-15 pt-15`}>
+          <p className="text text_type_main-default">
+            Ваш заказ начали готовить
+          </p>
+          <p className={`${orderDetails.text} text text_type_main-default`}>
+            Дождитесь готовности на орбитальной станции
+          </p>
+        </li>
+      </ul>
+    );
+  }
 }
 
-
-OrderDetails.propTypes = {
-    onClose: PropTypes.func,
-    number: PropTypes.number
-}
+export default OrderDetails;
