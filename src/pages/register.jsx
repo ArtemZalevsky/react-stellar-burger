@@ -49,6 +49,7 @@ function RegisterPage() {
             value={values.email}
             name={"email"}
             placeholder="E-mail"
+            autoComplete="username"
             isIcon={false}
           />
           <Input
