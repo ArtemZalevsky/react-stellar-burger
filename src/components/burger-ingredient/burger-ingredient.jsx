@@ -53,8 +53,10 @@ const BurgerIngredient = ({ ingridient, moveItemIngredient }) => {
       }
 
       const hoverBoundingRect = ref.current?.getBoundingClientRect();
+
       const hoverMiddleY =
         (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+
       const clientOffset = monitor.getClientOffset();
       const hoverClientY = clientOffset.y - hoverBoundingRect.top;
 
@@ -69,6 +71,7 @@ const BurgerIngredient = ({ ingridient, moveItemIngredient }) => {
       item.index = hoverIndex;
     },
     drop(item) {
+
       const dragIndex = item.index;
       const hoverIndex = index;
       if (dragIndex === hoverIndex) {

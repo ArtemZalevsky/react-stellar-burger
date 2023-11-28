@@ -2,8 +2,6 @@ import { useState, useMemo, useEffect } from "react";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import ingredientsStyles from "./burger-ingredients.module.css";
 import IngridientItem from "../ingridient-item/ingridient-item";
-import Modal from "../modal/modal";
-import IngredientDetails from "../ingredient-details/ingredient-details";
 import { useSelector, useDispatch } from "react-redux";
 import {
   getData,
@@ -13,6 +11,8 @@ import {
   deleteTabIngredient,
 } from "../../services/actions/actions";
 import { useInView } from "react-intersection-observer";
+import { useLocation, useNavigate, Link } from "react-router-dom";
+import { useParams } from 'react-router-dom';
 
 function BurgerIngredients() {
   const {
@@ -20,14 +20,17 @@ function BurgerIngredients() {
     burgerIngredientsRequest,
     burgerIngredientsFailed,
   } = useSelector((state) => state.burgerIngredients);
-  const { isOpenIngredient } = useSelector((state) => state.ingredientDetails);
+
   const dispatch = useDispatch();
+
+  const location = useLocation();
 
   useEffect(() => {
     dispatch(getData());
   }, [dispatch]);
 
   const [current, setCurrent] = useState("one");
+
   const bun = "bun";
   const sauce = "sauce";
   const main = "main";
@@ -36,11 +39,6 @@ function BurgerIngredients() {
     dispatch(openModalIngredientDetails());
     dispatch(returnTabIngredient(item));
   }
-
-  const handleCloseModalIngredient = () => {
-    dispatch(closeModalIngredientDetails());
-    dispatch(deleteTabIngredient());
-  };
 
   const buns = useMemo(
     () => burgerIngredients.filter((m) => m.type === bun),
@@ -72,7 +70,7 @@ function BurgerIngredients() {
   if (burgerIngredientsFailed) {
     return <p>Произошла ошибка при получении данных</p>;
   } else if (burgerIngredientsRequest) {
-    return <p>Загрузка данных...</p>;
+    return <p>Загрузка...</p>;
   } else {
     return (
       <>
@@ -101,12 +99,17 @@ function BurgerIngredients() {
               ref={oneRef}
             >
               {buns.map((ingridients) => (
-                <li key={ingridients._id}>
+                <Link
+                  key={ingridients._id}
+                  className={`${ingredientsStyles.ingridient__link} `}
+                  to={`/ingredients/${ingridients._id}`}
+                  state={{ background: location }}
+                >
                   <IngridientItem
                     ingridient={ingridients}
                     onTab={handleOpenModalIngredient}
                   />
-                </li>
+                </Link>
               ))}
             </ul>
           </div>
@@ -118,12 +121,17 @@ function BurgerIngredients() {
               ref={twoRef}
             >
               {sauces.map((ingridients) => (
-                <li key={ingridients._id}>
+                <Link
+                  key={ingridients._id}
+                  to={`/ingredients/${ingridients._id}`}
+                  state={{ background: location }}
+                  className={`${ingredientsStyles.ingridient__link} `}
+                >
                   <IngridientItem
                     ingridient={ingridients}
                     onTab={handleOpenModalIngredient}
                   />
-                </li>
+                </Link>
               ))}
             </ul>
           </div>
@@ -134,24 +142,21 @@ function BurgerIngredients() {
               id="three"
             >
               {fillings.map((ingridients) => (
-                <li key={ingridients._id}>
+                <Link
+                  key={ingridients._id}
+                  to={`/ingredients/${ingridients._id}`}
+                  state={{ background: location }}
+                  className={`${ingredientsStyles.ingridient__link} `}
+                >
                   <IngridientItem
                     ingridient={ingridients}
                     onTab={handleOpenModalIngredient}
                   />
-                </li>
+                </Link>
               ))}
             </ul>
           </div>
         </div>
-        {isOpenIngredient && (
-          <Modal
-            onClose={handleCloseModalIngredient}
-            title="Детали ингредиента"
-          >
-            <IngredientDetails />
-          </Modal>
-        )}
       </>
     );
   }

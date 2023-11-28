@@ -10,7 +10,6 @@ import { useMemo } from "react";
 
 const IngridientItem = ({ ingridient, onTab }) => {
   const { bun, ingredients } = useSelector((state) => state.ingredientsConstructor);
-
   const [{ isDragging }, drag] = useDrag({
     type: "ingredient",
     item: ingridient,

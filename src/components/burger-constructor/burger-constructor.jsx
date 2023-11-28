@@ -20,15 +20,21 @@ import {
   clearConstructorBun,
 } from "../../services/actions/actions";
 import { useDrop } from "react-dnd";
-
+import { useNavigate } from "react-router-dom";
 
 function BurgerConstructor() {
+
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const { bun, ingredients } = useSelector(
     (state) => state.ingredientsConstructor
   );
-  console.log();
+  const { user } = useSelector(
+    (state) => state.userReducer
+  );
   const { isOpenOrder } = useSelector((state) => state.orderDetails);
+
   const saucesAndMains = useMemo(
     () => ingredients.filter((m) => m.type !== "bun"),
     [ingredients]
@@ -56,8 +62,13 @@ function BurgerConstructor() {
       isActive: monitor.canDrop() && monitor.isOver(),
     }),
   });
+
   const handleOpenModal = () => {
+    if (user === null) {
+      navigate("/login", { replace: true });
+    }
     dispatch(openModalOrderDetails());
+
     const allIngredients = [...orderIngridients, bun._id];
     dispatch(postOrderFetch(allIngredients));
   };
