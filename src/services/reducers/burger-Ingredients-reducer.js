@@ -4,7 +4,6 @@ import {
   GET_DATA_FAILED,
 } from '../actions/actions'
 
-
 const initialState = {
   burgerIngredients: [],
   burgerIngredientsRequest: false,

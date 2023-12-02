@@ -1,9 +1,9 @@
-import { getDataFetch, postOrder } from '../../api/api'
+import { getDataFetch, postOrder, getUser, login, postMail, postRegister, logOut } from '../../api/api';
 import { v4 as uuidv4 } from "uuid";
 
-export const GET_DATA_REQUEST = 'GET_DATA_REQUEST';
 export const GET_DATA_SUCCESS = 'GET_DATA_SUCCESS';
 export const GET_DATA_FAILED = 'GET_DATA_FAILED';
+export const GET_DATA_REQUEST = 'GET_DATA_REQUEST';
 
 export const POST_ORDER_REQUEST = 'POST_ORDER_REQUEST';
 export const POST_ORDER_SUCCESS = 'POST_ORDER_SUCCESS';
@@ -32,7 +32,6 @@ export function getData() {
     dispatch({
       type: GET_DATA_REQUEST
     })
-
     getDataFetch()
       .then(res => {
         if (res && res.success) {
@@ -113,8 +112,8 @@ export const addIngredients = (item) => {
   return {
     type: ADD_INGREDIENTS_CONSTRUCTOR,
     ingredients: {
-      ...item, // используем `spread`, чтобы поменять ссылку на объект. Таким образом `redux` обновит его в хранилище
-      uniqueId: uuidv4()  // и добавляем в объект новое поле, которое потом будет использовано в `key`
+      ...item,
+      uniqueId: uuidv4()
     }
   }
 }
@@ -150,4 +149,3 @@ export function moveIngredientItem(dragIndex, hoverIndex) {
     hoverIndex: hoverIndex,
   }
 }
-
