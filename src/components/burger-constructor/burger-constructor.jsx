@@ -23,23 +23,19 @@ import { useDrop } from "react-dnd";
 import { useNavigate } from "react-router-dom";
 
 function BurgerConstructor() {
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const { bun, ingredients } = useSelector(
-    (state) => state.ingredientsConstructor
+    (state) => state.rootReducer.ingredientsConstructor
   );
   const { user } = useSelector(
-    (state) => state.userReducer
+    (state) => state.rootReducer.userReducer
   );
-  const { isOpenOrder } = useSelector((state) => state.orderDetails);
-
+  const { isOpenOrder } = useSelector((state) => state.rootReducer.orderDetails);
   const saucesAndMains = useMemo(
     () => ingredients.filter((m) => m.type !== "bun"),
     [ingredients]
   );
-
   const orderIngridients = useMemo(
     () => ingredients.map((m) => m._id),
     [ingredients]
@@ -64,13 +60,14 @@ function BurgerConstructor() {
   });
 
   const handleOpenModal = () => {
-    if (user === null) {
+    if (!user) {
       navigate("/login", { replace: true });
-    }
-    dispatch(openModalOrderDetails());
+    } else {
+      dispatch(openModalOrderDetails());
 
-    const allIngredients = [...orderIngridients, bun._id];
-    dispatch(postOrderFetch(allIngredients));
+      const allIngredients = [...orderIngridients, bun._id];
+      dispatch(postOrderFetch(allIngredients));
+    }
   };
 
   const handleCloseModal = () => {
@@ -102,13 +99,13 @@ function BurgerConstructor() {
 
   return (
     <div>
-      <div className={`${burgerStyles.ingridient} pl-4 pb-5`} ref={drop}>
-        {isActive && "булочку закинь повыше, соусы и начинки - посередине"}
+      <div className={`${burgerStyles.ingridient}`} ref={drop}>
+      <p className={`${burgerStyles.info} ${isActive && burgerStyles.flex}`}>Булочки сверху и снизу, соусы и начинки - посередине</p>
         {bun && (
           <ConstructorElement
             type="top"
             isLocked="true"
-            text={`${bun.name} (верх)`}
+            text={`${bun.name} (Верх)`}
             price={bun.price}
             thumbnail={bun.image}
             ingridient={bun}
@@ -128,7 +125,7 @@ function BurgerConstructor() {
           <ConstructorElement
             type="bottom"
             isLocked="true"
-            text={`${bun.name} (низ)`}
+            text={`${bun.name} (Низ)`}
             price={bun.price}
             thumbnail={bun.image_mobile}
             ingridient={bun}

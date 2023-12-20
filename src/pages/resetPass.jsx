@@ -37,6 +37,7 @@ function ResetPass() {
         console.error(`Ошибка: ${err}`);
       });
   }
+
   if (!localStorage.getItem("email")) {
     return <Navigate to={forgotPass} replace={true} />;
   }

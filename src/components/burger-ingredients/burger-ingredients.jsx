@@ -1,33 +1,25 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo } from "react";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import ingredientsStyles from "./burger-ingredients.module.css";
 import IngridientItem from "../ingridient-item/ingridient-item";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  getData,
   openModalIngredientDetails,
-  closeModalIngredientDetails,
-  returnTabIngredient,
-  deleteTabIngredient,
+  returnTabIngredient
 } from "../../services/actions/actions";
 import { useInView } from "react-intersection-observer";
-import { useLocation, useNavigate, Link } from "react-router-dom";
-import { useParams } from 'react-router-dom';
+import { useLocation, Link } from "react-router-dom";
+import Loader from "../loader/loader";
 
 function BurgerIngredients() {
   const {
     burgerIngredients,
     burgerIngredientsRequest,
     burgerIngredientsFailed,
-  } = useSelector((state) => state.burgerIngredients);
+  } = useSelector((state) => state.rootReducer.burgerIngredients);
 
   const dispatch = useDispatch();
-
   const location = useLocation();
-
-  useEffect(() => {
-    dispatch(getData());
-  }, [dispatch]);
 
   const [current, setCurrent] = useState("one");
 
@@ -59,7 +51,7 @@ function BurgerIngredients() {
     setCurrent(selectTab);
     const item = document.getElementById(selectTab);
     if (item) {
-      return item.scrollIntoView({ behavior: "smooth" });
+      return item.scrollIntoView({ behavior: "auto" });
     }
   };
 
@@ -70,7 +62,7 @@ function BurgerIngredients() {
   if (burgerIngredientsFailed) {
     return <p>Произошла ошибка при получении данных</p>;
   } else if (burgerIngredientsRequest) {
-    return <p>Загрузка...</p>;
+    return <Loader />;
   } else {
     return (
       <>
@@ -114,10 +106,9 @@ function BurgerIngredients() {
             </ul>
           </div>
           <div className="pt-5 pb-5">
-            <h2 className="text text_type_main-medium pb-1">Соусы</h2>
+            <h2 className="text text_type_main-medium pb-1" id="two">Соусы</h2>
             <ul
               className={`${ingredientsStyles.ingridient__list} pt-5`}
-              id="two"
               ref={twoRef}
             >
               {sauces.map((ingridients) => (
@@ -136,10 +127,9 @@ function BurgerIngredients() {
             </ul>
           </div>
           <div className="pt-5 pb-5" ref={threeRef}>
-            <h2 className="text text_type_main-medium pb-1">Начинки</h2>
+            <h2 className="text text_type_main-medium pb-1" id="three">Начинки</h2>
             <ul
               className={`${ingredientsStyles.ingridient__list} pt-5`}
-              id="three"
             >
               {fillings.map((ingridients) => (
                 <Link

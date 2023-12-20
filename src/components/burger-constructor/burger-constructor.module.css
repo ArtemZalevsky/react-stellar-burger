@@ -1,13 +1,16 @@
 .ingridient {
   margin: 0 auto;
+  min-height: 660px;
+  position: relative;
 }
 
 .ingridient__list {
-  height: 664px;
+  min-height: 480px;
+  height: fit-content;
   overflow-y: scroll;
   list-style-type: none;
   padding-left: 0;
-  height: 464px;
+
 }
 
 .ingridient__list::-webkit-scrollbar {
@@ -24,6 +27,7 @@
   display: flex;
   align-items: center;
   justify-items: center;
+  cursor: grab;
 }
 
 .ingridient__sum {
@@ -34,4 +38,19 @@
   max-width: 552px;
   display: flex;
   justify-content: flex-end;
+}
+
+.info {
+  background: linear-gradient(63.18deg, #801ab3 0%, #4c4cff 100%);
+  border-radius: 5px;
+  width: fit-content;
+  padding: 5px;
+  display: none;
+  position: absolute;
+  top: -50px;
+  left: 70px;
+}
+
+.flex {
+  display: flex;
 }

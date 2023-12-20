@@ -30,16 +30,10 @@ export function postRegisterFetch(array) {
     })
     postRegister(array)
       .then(res => {
-        if (res && res.success) {
-          dispatch({
-            type: POST_REGISTER_SUCCESS,
-            user: setUser(res.user),
-          })
-        } else {
-          dispatch({
-            type: POST_REGISTER_FAILED
-          })
-        }
+        dispatch({
+          type: POST_REGISTER_SUCCESS,
+          user: setUser(res.user),
+        })
       }).catch(err => {
         dispatch({
           type: POST_REGISTER_FAILED
@@ -74,17 +68,11 @@ export const patchUserFetch = (form) => {
     })
     patchUser(form)
       .then((res) => {
-        if (res && res.success) {
-          dispatch({
-            type: PATCH_USER_SUCCESS,
-            user: res
-          })
-          dispatch(setUser(res.user));
-        } else {
-          dispatch({
-            type: PATCH_USER_FAILED
-          })
-        }
+        dispatch({
+          type: PATCH_USER_SUCCESS,
+          user: res
+        })
+        dispatch(setUser(res.user));
       }).catch(err => {
         dispatch({
           type: PATCH_USER_FAILED
@@ -101,20 +89,14 @@ export const signIn = (form) => {
     })
     login(form)
       .then(res => {
-        if (res && res.success) {
-          localStorage.setItem("accessToken", res.accessToken);
-          localStorage.setItem("refreshToken", res.refreshToken);
-          dispatch({
-            type: POST_SIGNIN_SUCCES,
-            user: res
-          })
-          dispatch(setUser(res.user))
-          dispatch(setAuthChecked(true));
-        } else {
-          dispatch({
-            type: POST_SIGNIN_FAILED
-          })
-        }
+        localStorage.setItem("accessToken", res.accessToken);
+        localStorage.setItem("refreshToken", res.refreshToken);
+        dispatch({
+          type: POST_SIGNIN_SUCCES,
+          user: res
+        })
+        dispatch(setUser(res.user))
+        dispatch(setAuthChecked(true));
       }).catch(err => {
         dispatch({
           type: POST_SIGNIN_FAILED
@@ -130,19 +112,13 @@ export const register = (form) => {
     })
     postRegister(form)
       .then(res => {
-        if (res && res.success) {
-          localStorage.setItem("accessToken", res.accessToken);
-          localStorage.setItem("refreshToken", res.refreshToken);
-          dispatch({
-            type: POST_REGISTER_SUCCESS,
-            user: res,
-          })
-          dispatch(setUser(res.user))
-        } else {
-          dispatch({
-            type: POST_REGISTER_FAILED
-          })
-        }
+        localStorage.setItem("accessToken", res.accessToken);
+        localStorage.setItem("refreshToken", res.refreshToken);
+        dispatch({
+          type: POST_REGISTER_SUCCESS,
+          user: res,
+        })
+        dispatch(setUser(res.user))
       }).catch(err => {
         dispatch({
           type: POST_REGISTER_FAILED
@@ -174,18 +150,12 @@ export const signOut = () => {
     })
     logOut()
       .then(res => {
-        if (res && res.success) {
-          localStorage.removeItem("accessToken");
-          localStorage.removeItem("refreshToken");
-          dispatch({
-            type: POST_SIGNOUT_SUCCESS,
-          })
-          dispatch(setUser(null))
-        } else {
-          dispatch({
-            type: POST_SIGNOUT_FAILED
-          })
-        }
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
+        dispatch({
+          type: POST_SIGNOUT_SUCCESS,
+        })
+        dispatch(setUser(null))
       }).catch(err => {
         dispatch({
           type: POST_SIGNOUT_FAILED

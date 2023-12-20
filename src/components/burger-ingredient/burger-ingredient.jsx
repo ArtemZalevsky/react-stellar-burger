@@ -10,16 +10,15 @@ import { useDrag, useDrop } from "react-dnd";
 import { useRef } from "react";
 
 const BurgerIngredient = ({ ingridient, moveItemIngredient }) => {
-  const id = ingridient.key;
-  const { ingredients } = useSelector((state) => state.ingredientsConstructor);
-
+  const id = ingridient.keyUuid;
+  const { ingredients } = useSelector((state) => state.rootReducer.ingredientsConstructor);
   const index = ingredients.indexOf(ingridient);
   const dispatch = useDispatch();
 
   const onDelete = () => {
     return dispatch({
       type: DELETE_INGREDIENTS_CONSTRUCTOR,
-      key: ingridient.key,
+      keyUuid: ingridient.keyUuid,
     });
   };
 
@@ -33,7 +32,6 @@ const BurgerIngredient = ({ ingridient, moveItemIngredient }) => {
     }),
   });
   const opacity = isDragging ? 0 : 1;
-
   const [{ handlerId }, drop] = useDrop({
     accept: "item",
     collect(monitor) {
@@ -53,10 +51,8 @@ const BurgerIngredient = ({ ingridient, moveItemIngredient }) => {
       }
 
       const hoverBoundingRect = ref.current?.getBoundingClientRect();
-
       const hoverMiddleY =
         (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
-
       const clientOffset = monitor.getClientOffset();
       const hoverClientY = clientOffset.y - hoverBoundingRect.top;
 
