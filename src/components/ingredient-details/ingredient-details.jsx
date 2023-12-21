@@ -5,12 +5,11 @@ import { useParams } from "react-router-dom";
 import { returnTabIngredient } from "../../services/actions/actions";
 
 const IngredientDetails = () => {
-
   const tabIngredient = useSelector(
-    (state) => state.ingredientDetails.tabIngredient
+    (state) => state.rootReducer.ingredientDetails.tabIngredient
   );
 
-  const { burgerIngredients } = useSelector((state) => state.burgerIngredients);
+  const { burgerIngredients } = useSelector((state) => state.rootReducer.burgerIngredients);
   const dispatch = useDispatch();
 
   const { id } = useParams();

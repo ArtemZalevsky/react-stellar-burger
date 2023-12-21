@@ -45,7 +45,6 @@ export const userReducer = (state = initialState, action) => {
           ...state.user,
           name: action.user.name,
           email: action.user.email,
-          password: action.user.password
         },
         patchRequest: false,
         isAuthChecked: true
@@ -73,7 +72,6 @@ export const userReducer = (state = initialState, action) => {
           ...state.user,
           name: action.user.name,
           email: action.user.email,
-          password: action.user.password
         },
         registerRequest: false,
         isAuthChecked: true
@@ -101,7 +99,6 @@ export const userReducer = (state = initialState, action) => {
           ...state.user,
           name: action.user.name,
           email: action.user.email,
-          password: action.user.password
         },
         isAuthChecked: true,
       }

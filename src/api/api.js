@@ -4,10 +4,18 @@ const checkResponse = (res) => {
   return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 };
 
+const checkSuccess = (res) => {
+  if (res && res.success) {
+    return res;
+  }
+  return Promise.reject(`Ответ не success: ${res}`);
+};
+
 
 function request(endpoint, options) {
   return fetch(`${BASE_URL}${endpoint}`, options)
     .then(checkResponse)
+    .then(checkSuccess);
 }
 
 const getDataFetch = () => {
@@ -25,6 +33,10 @@ const postOrder = (ingredients) => {
       ingredients
     })
   })
+}
+
+const getOrdersFetch = (number) => {
+  return request(`orders/${number}`)
 }
 
 const getUser = () => {
@@ -136,4 +148,4 @@ const resetPass = ({ password, token }) => {
   })
 }
 
-export { getDataFetch, postOrder, postMail, getUser, login, logOut, postRegister, resetPass }
+export { getDataFetch, postOrder, postMail, getUser, login, logOut, postRegister, resetPass, getOrdersFetch }
