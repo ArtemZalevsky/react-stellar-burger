@@ -10,7 +10,6 @@
   overflow-y: scroll;
   list-style-type: none;
   padding-left: 0;
-
 }
 
 .ingridient__list::-webkit-scrollbar {
