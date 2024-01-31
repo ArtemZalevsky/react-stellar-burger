@@ -11,7 +11,6 @@ export const socketMiddleware = (wsActions: TWsActionTypes): Middleware=> {
       const { type } = action;
       const {
         wsConnect,
-        wsSendMessage,
         onOpen,
         onClose,
         onError,
@@ -45,7 +44,7 @@ export const socketMiddleware = (wsActions: TWsActionTypes): Middleware=> {
           dispatch(onClose());
         };
 
-        if (wsSendMessage && type === wsSendMessage.type) {
+        if (onMessage && type === onMessage.type) {
           socket.send(JSON.stringify(action.payload));
         }
 

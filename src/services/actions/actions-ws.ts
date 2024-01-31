@@ -17,7 +17,6 @@ export const wsErrorInProfile = createAction('GET_ALL_ORDERS_IN_PROFILE_WS_ERROR
 
 export type TWsActionTypes = {
     wsConnect: typeof connect;
-    wsSendMessage: typeof wsMessage;
     onOpen: typeof wsOpen;
     onClose: typeof wsClose;
     onError: typeof wsError;
@@ -27,8 +26,7 @@ export type TWsActionTypes = {
 }
 
 export const wsActions: TWsActionTypes = {
-    wsConnect: connect,
-    wsSendMessage: wsMessage,
+    wsConnect: connectInProfile,
     onOpen: wsOpen,
     onClose: wsClose,
     onError: wsError,

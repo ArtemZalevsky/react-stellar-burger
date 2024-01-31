@@ -30,13 +30,13 @@ export const ordersMiddlware = socketMiddleware({
 });
 
 export const ordersProfileMiddlware = socketMiddleware({
-  wsConnect: connectInProfile,
-  wsDisconnect: disconnectInProfile,
-  wsConnecting: wsConnectingInProfile,
-  onOpen: wsOpenInProfile,
-  onMessage: wsMessageInProfile,
-  onClose: wsCloseInProfile,
-  onError: wsErrorInProfile,
+  wsConnect: connect,
+  wsDisconnect: disconnect,
+  wsConnecting: wsConnecting,
+  onOpen: wsOpen,
+  onMessage: wsMessage,
+  onClose: wsClose,
+  onError: wsError,
 });
 
 export const initStore = configureStore({
