@@ -2,7 +2,7 @@ import { MiddlewareAPI } from "@reduxjs/toolkit";
 import { Middleware } from 'redux';
 import { TWsActionTypes } from "../actions/actions-ws";
 
-export const socketMiddleware = (wsActions: TWsActionTypes): Middleware=> {
+export const socketMiddleware = (wsActions: TWsActionTypes): Middleware => {
   return (store: MiddlewareAPI) => {
     let socket: WebSocket | null = null;
 

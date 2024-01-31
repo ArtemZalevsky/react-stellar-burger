@@ -7,19 +7,12 @@ import {
   wsClose,
   wsMessage,
   wsError,
-  wsConnecting,
-  connectInProfile,
-  disconnectInProfile,
-  wsConnectingInProfile,
-  wsOpenInProfile,
-  wsCloseInProfile,
-  wsMessageInProfile,
-  wsErrorInProfile,
+  wsConnecting
 } from "./actions/actions-ws";
 import { socketMiddleware } from "./middleware/socket-middleware";
 import { configureStore } from "@reduxjs/toolkit";
 
-export const ordersMiddlware = socketMiddleware({
+export const ordersMiddleware = socketMiddleware({
   wsConnect: connect,
   wsDisconnect: disconnect,
   wsConnecting: wsConnecting,
@@ -29,7 +22,7 @@ export const ordersMiddlware = socketMiddleware({
   onError: wsError,
 });
 
-export const ordersProfileMiddlware = socketMiddleware({
+export const ordersProfileMiddleware = socketMiddleware({
   wsConnect: connect,
   wsDisconnect: disconnect,
   wsConnecting: wsConnecting,
@@ -45,8 +38,8 @@ export const initStore = configureStore({
   },
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware().concat(
-      ordersMiddlware,
-      ordersProfileMiddlware
+      ordersMiddleware,
+      ordersProfileMiddleware
     );
   },
 });
