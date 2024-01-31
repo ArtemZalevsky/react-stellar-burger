@@ -6,8 +6,8 @@ import {
   wsErrorInProfile
 } from '../actions/actions-ws';
 import { WebsocketStatus } from '../../utils/orders';
-import { createReducer } from '@reduxjs/toolkit';
-import { IOrder } from '../../utils/types';
+import { createReducer, PayloadAction } from '@reduxjs/toolkit';
+import { IOrder, IOrders } from '../../utils/types';
 
 export type TWSInProfileState = {
   status: string,
@@ -34,8 +34,9 @@ export const ordersInProfileReducer = createReducer(initialState, (builder) => {
       state.connectionError = '';
       state.loader = true;
     })
-    .addCase(wsMessageInProfile, (state, { payload }: any) => {
-      state.orders = payload.orders ?? [];
+    .addCase(wsMessageInProfile, (state, { payload }: PayloadAction<IOrders | undefined>
+      ) => {
+      state.orders = payload?.orders ?? [];
       state.loader = false;
     })
     .addCase(wsCloseInProfile, state => {

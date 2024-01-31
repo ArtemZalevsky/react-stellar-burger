@@ -1,10 +1,12 @@
-import { MiddlewareAPI } from "redux";
+import { MiddlewareAPI } from "@reduxjs/toolkit";
+import { Middleware } from 'redux';
+import { TWsActionTypes } from "../actions/actions-ws";
 
-export const socketMiddleware: any = (wsActions: any) => {
+export const socketMiddleware = (wsActions: TWsActionTypes): Middleware=> {
   return (store: MiddlewareAPI) => {
-    let socket: any = null;
+    let socket: WebSocket | null = null;
 
-    return (next: any) => (action: any) => {
+    return (next) => (action) => {
       const { dispatch } = store;
       const { type } = action;
       const {
@@ -25,11 +27,11 @@ export const socketMiddleware: any = (wsActions: any) => {
 
       if (socket) {
         socket.onopen = () => {
-          dispatch(onOpen());
+          dispatch({ type: onOpen });
         };
 
         socket.onerror = () => {
-          dispatch(onError("Error"));
+          dispatch({ type: onError });
         };
 
         socket.onmessage = (event: any) => {
