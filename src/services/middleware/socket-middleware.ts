@@ -26,11 +26,11 @@ export const socketMiddleware = (wsActions: TWsActionTypes): Middleware=> {
 
       if (socket) {
         socket.onopen = () => {
-          dispatch({ type: onOpen });
+          dispatch(onOpen());
         };
 
         socket.onerror = () => {
-          dispatch({ type: onError });
+          dispatch(onError());
         };
 
         socket.onmessage = (event: any) => {
