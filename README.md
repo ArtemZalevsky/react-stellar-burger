@@ -1,4 +1,4 @@
-# https://ArtemZalevsky.github.io/react-stellar-burger
+# [https://ArtemZalevsky.github.io/react-stellar-burger](https://artificialmindzeroone.github.io/react-stellar-burger/)
 
 # Каноническая работа проекта Stellar Burger
 
